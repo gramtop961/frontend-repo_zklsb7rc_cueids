@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Sparkles, Gift, Box, Search } from 'lucide-react'
 import { useRef } from 'react'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 export default function Hero({ onSelectMood, onSearch }) {
   const ref = useRef(null)
@@ -11,7 +12,7 @@ export default function Hero({ onSelectMood, onSearch }) {
     { key: 'happy', label: 'Happy' },
     { key: 'calm', label: 'Calm' },
     { key: 'romantic', label: 'Romantic' },
-    { key: 'stress', label: 'Stress' },
+    { key: 'festive', label: 'Festive' },
     { key: 'self-love', label: 'Self-Love' },
   ]
 
@@ -104,6 +105,10 @@ export default function Hero({ onSelectMood, onSearch }) {
             </div>
           </div>
         </motion.div>
+
+        <div className="absolute left-4 bottom-4 opacity-70 hidden sm:block">
+          <Player autoplay loop src="https://assets6.lottiefiles.com/packages/lf20_8dxnzzmk.json" style={{ height: '120px', width: '120px' }} />
+        </div>
       </div>
     </section>
   )
