@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
 import { Player } from '@lottiefiles/react-lottie-player'
+import { useCart } from '../CartContext'
+import Reviews from './Reviews'
+import RecommendationsCarousel from './RecommendationsCarousel'
 
 export default function ProductPage(){
   const { slug } = useParams()
@@ -10,6 +12,7 @@ export default function ProductPage(){
   const [box, setBox] = useState(null)
   const [ribbon, setRibbon] = useState('Blush Pink')
   const [shimmer, setShimmer] = useState(false)
+  const { addItem } = useCart()
 
   useEffect(()=>{
     const load = async () => {
@@ -23,6 +26,10 @@ export default function ProductPage(){
   }, [backend, slug])
 
   if (!box) return <div className="max-w-7xl mx-auto px-6 py-10">Loading...</div>
+
+  const addToCart = () => {
+    addItem({ id: box.slug, title: box.name, price: box.price, ribbon })
+  }
 
   return (
     <div className="min-h-screen">
@@ -74,7 +81,7 @@ export default function ProductPage(){
             </div>
             <div className="mt-5 flex gap-3">
               <button onClick={()=>{setShimmer(true); setTimeout(()=>setShimmer(false), 1600)}} className="flex-1 rounded-xl bg-gradient-to-r from-[#FFD6E0] to-[#E8DFF5] text-[#624a55] px-5 py-3 font-medium">Unbox ✨</button>
-              <button className="flex-1 rounded-xl bg-[#2b2b2b] text-white px-5 py-3">Add to Cart</button>
+              <button onClick={addToCart} className="flex-1 rounded-xl bg-[#2b2b2b] text-white px-5 py-3">Add to Cart</button>
             </div>
             <div className="mt-4 text-xs text-[#8a8a8a]">Delivery: {box.estimated_delivery} • Rating {box.rating} ({box.reviews})</div>
           </div>
@@ -84,6 +91,9 @@ export default function ProductPage(){
             <p className="font-medium" style={{ fontFamily: 'Poppins, ui-sans-serif' }}>Why they love it</p>
             <p className="text-sm text-[#777] mt-1">Soft, feminine, celebratory. A ready-to-gift curation that feels personal and premium.</p>
           </div>
+
+          <Reviews box={box} />
+          <RecommendationsCarousel mood={box.mood} />
         </div>
       </div>
     </div>
