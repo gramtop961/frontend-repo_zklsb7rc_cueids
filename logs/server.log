@@ -3,9 +3,7 @@
 > vite
 
 
-  VITE v5.4.20  ready in 254 ms
+  VITE v5.4.20  ready in 255 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.0.40:3000/
-3:49:32 PM [vite] ✨ new dependencies optimized: @lottiefiles/react-lottie-player
-3:49:32 PM [vite] ✨ optimized dependencies changed. reloading
